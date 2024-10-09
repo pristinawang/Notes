@@ -62,7 +62,7 @@ git clone <repository-url>
 ```
 However, sometimes we might start coding and forgot to do the above steps, now we want to push existing code to Github.
 
--Follow the "How to push non-git directory to github" in notionnotes in this repository.
+- Follow the "How to push non-git directory to github" in notionnotes in this repository.
 #### 3.2.2: Step2-(Simple)Daily Git Workflow
 For simplicity, we are not using branches here yet.
 
