@@ -13,7 +13,6 @@ When coding, you constantly update your code, creating multiple versions, and so
 ### 1.2: What is GitHub?
 GitHub is a platform (or we can say a website) that uses the Git software to host code repositories (倉庫). GitHub uses Git to host its users' code.
 
-
 ## 2: How do I use Git?
 
 ### 2.1: Follow good Git habits.
