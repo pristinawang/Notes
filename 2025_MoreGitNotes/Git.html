@@ -1,0 +1,720 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Git</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b8b8b375-0b42-432d-bda9-74472722a56a" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🪢</span></div><h1 class="page-title">Git</h1><p class="page-description"></p></header><div class="page-body"><p id="58ab4de6-ea54-4e26-a591-9cd29ad9b2ae" class=""><a href="https://www.freecodecamp.org/news/practical-git-and-git-workflows/">https://www.freecodecamp.org/news/practical-git-and-git-workflows/</a></p><p id="f38c5d12-723e-417a-b0b1-6cff420e8d52" class=""><a href="https://kbroman.org/github_tutorial/pages/first_time.html">https://kbroman.org/github_tutorial/pages/first_time.html</a></p><h1 id="1b30c245-273b-8020-8de7-e8e916f30412" class="">Topics</h1><figure id="1b30c245-273b-80ee-b2ae-ecce495bd623" class="link-to-page"><a href="Git%20b8b8b3750b42432dbda974472722a56a/Pushing%20Non-git%20Folder%20Code(or%20A%20folder%20code)%20to%20G%201b30c245273b80eeb2aeecce495bd623.html"><span class="icon">⬆️</span>Pushing Non-git Folder Code(or A folder code) to Git Repo(or B Git Repo)(oops i did it again)</a></figure><figure id="1b40c245-273b-803f-9624-c3e3e84f8e79" class="link-to-page"><a href="Git%20b8b8b3750b42432dbda974472722a56a/Regular%20Push%20to%20Update%20Code%201b40c245273b803f9624c3e3e84f8e79.html"><span class="icon">🛫</span>Regular Push to Update Code</a></figure><figure id="1bc0c245-273b-80ab-98a5-d3d866093dc5" class="link-to-page"><a href="Git%20b8b8b3750b42432dbda974472722a56a/Everyday%20Git%20workflow%20Branch%201bc0c245273b80ab98a5d3d866093dc5.html"><span class="icon">🌲</span>Everyday Git workflow: Branch</a></figure><h1 id="1b40c245-273b-80ac-9141-f68682575c4f" class="">Git Status for Subdirectories</h1><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1b40c245-273b-80a2-8b21-dd3e209a7075" class="code"><code class="language-Python">git status --untracked-files=all</code></pre><h1 id="1b40c245-273b-800f-829f-e0b7adcb063a" class="">Pushing Minor Commits</h1><p id="1b40c245-273b-806d-9a1b-ce6e430b501c" class="">Always commits everything but don’t push until super sure because it is hard to change after pushed.</p><h2 id="1b40c245-273b-806c-aaec-c0b207a4401e" class="">Previous Commits Aren’t Pushed yet</h2><p id="1b40c245-273b-8071-810b-d0c0b08330c6" class="">Just commit the new changes</p><p id="1b40c245-273b-804a-b07d-f17fd665bc03" class="">and than squash the commits</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1b40c245-273b-8009-86c1-eb871c949d9c" class="code"><code class="language-Python">git rebase -i HEAD~2
+## this tells git to squash the lastest two commits</code></pre><p id="1b40c245-273b-80fb-8fe0-edce03c4a1a1" class="">and git push normally</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1b40c245-273b-80a2-a706-caa0b1d8683d" class="code"><code class="language-Python">git push origin main</code></pre><h2 id="1b40c245-273b-8042-937b-d5a2d0b5e918" class="">Previous Commits Have been Pushed</h2><p id="1b40c245-273b-807b-9c0e-fbbfb1f7b5ec" class="">Commit the new change</p><p id="1b40c245-273b-809e-8735-c1207ba7dfb7" class="">and then change the two latest commit message into one using the following commands</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1b40c245-273b-802c-91ca-d63d842a3e26" class="code"><code class="language-Python">git rebase -i HEAD~2</code></pre><p id="1b40c245-273b-80b0-934b-dbde3d841e49" class=""><strong>Now, force push</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1b40c245-273b-80b8-9f59-d166d1ba104a" class="code"><code class="language-Python">git push --force-with-lease origin main</code></pre><p id="1b40c245-273b-8089-9a3b-c8c929dab9d1" class="">P.S. why are we using “—force-with-lease” instead of “—force”</p><figure id="1b40c245-273b-806d-9579-fd1e2479e9ee" class="image"><a href="Git%20b8b8b3750b42432dbda974472722a56a/image.png"><img style="width:710px" src="Git%20b8b8b3750b42432dbda974472722a56a/image.png"/></a></figure><h1 id="1df21f99-0628-4204-bdd7-e4fd9cc500e5" class="">Setting None Default Key</h1><h2 id="d2f0ae1e-1519-4a41-b73e-796d58b0f8b2" class="">Set up None Default Key</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="657027cf-e75c-49af-a0a1-9c09b0613c79" class="code"><code class="language-Python">$ ssh-keygen -t rsa -C &quot;github&quot;
+#The algorithm is selected using the -t option
+#-C is for comment</code></pre><h2 id="e4f1d744-1c2e-4b94-b6e7-fe306bf10649" class="">Give the public/private key pair a none default file name</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="6a11c05e-b438-4dad-9bdc-a781b5d72035" class="code"><code class="language-Python">Enter file in which to save the key (/home/cs601-pwang71/.ssh/id_rsa): /home/cs601-pwang71/.ssh/id_rsa_github</code></pre><h2 id="34ce2480-5afd-4e89-a3ae-c29b062ff2d4" class="">Checkout the comment this way</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5bc80275-2c73-4700-98ae-2fbce9ad5649" class="code"><code class="language-Python">[cs601-pwang71@login01 .ssh]$ cat id_rsa_github.pub 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDExGkcDaHYT9SpX+4UQqi66H95WkeYVHENvGXICWLX0fxmx4JzFgBuWKwV2J12CKQ+QWXiGcDgWIWlF9ij2ZAeVeqy7H6DFhnV1nmenJIRuenTFDNf8gNpy6/YYK4PeMQOQiM/ctvFCeVyP/6uPHSASbyYDyBScZ+GtWEMnOWnoU04sja9fG1kDC9VjkLFt1fWJuAvfAxahUAGZiKnmJhUwd8CtgKr58vuH2DrpRD5HY+MWe69634ZxgN846ecBN+oUmit75pC9KqJQSAepwMxhV137jfjMa8PRNbZCw5i7QnaR1x2A27hZQ9XLjz6NOn3UiXVD5gt1xewV8cu/8V1aVQtL3P4fS1CsLAiTJuCEuRhcEMdHk5XqWKahFndZlSXRcYQdlx6tW1J2h5Ht8esoIECXYCXqtZggDu0VgluCXOVizjKcO3xHc+1QduJA9/+tTAWYXpFN6wWHhY5sws72kfwQW7PEA8Oc1JWhVj9+Qy1Y6u8r1F0UTla0i4TiU0= github</code></pre><h2 id="82d74f53-05da-4e14-a653-318bf754597d" class="">Full Process</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="78ae1025-be90-4029-bafd-9577031a0d56" class="code"><code class="language-Python">[cs601-pwang71@login01 .ssh]$ ssh-keygen -t rsa -C &quot;github&quot;
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/cs601-pwang71/.ssh/id_rsa): /home/cs601-pwang71/.ssh/id_rsa_github
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/cs601-pwang71/.ssh/id_rsa_github.
+Your public key has been saved in /home/cs601-pwang71/.ssh/id_rsa_github.pub.
+The key fingerprint is:
+SHA256:BclZSJHrua3I61UfMNTtOzebcPN1rt2iXqrQ0BAeq+0 github
+The key&#x27;s randomart image is:
++---[RSA 3072]----+
+|       o*Bo. .   |
+|       .**  . .  |
+|        +.+  .   |
+|       o.+ o  .  |
+|      ..S.o .  . |
+|       .o+ . oo++|
+|        Eo. . ++O|
+|     . o...  o.++|
+|     .=....o+..oo|
++----[SHA256]-----+
+[cs601-pwang71@login01 .ssh]$ ls
+authorized_keys  id_ecdsa  id_ecdsa.pub  id_rsa_github  id_rsa_github.pub
+[cs601-pwang71@login01 .ssh]$ cat id_rsa_github.pub 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDExGkcDaHYT9SpX+4UQqi66H95WkeYVHENvGXICWLX0fxmx4JzFgBuWKwV2J12CKQ+QWXiGcDgWIWlF9ij2ZAeVeqy7H6DFhnV1nmenJIRuenTFDNf8gNpy6/YYK4PeMQOQiM/ctvFCeVyP/6uPHSASbyYDyBScZ+GtWEMnOWnoU04sja9fG1kDC9VjkLFt1fWJuAvfAxahUAGZiKnmJhUwd8CtgKr58vuH2DrpRD5HY+MWe69634ZxgN846ecBN+oUmit75pC9KqJQSAepwMxhV137jfjMa8PRNbZCw5i7QnaR1x2A27hZQ9XLjz6NOn3UiXVD5gt1xewV8cu/8V1aVQtL3P4fS1CsLAiTJuCEuRhcEMdHk5XqWKahFndZlSXRcYQdlx6tW1J2h5Ht8esoIECXYCXqtZggDu0VgluCXOVizjKcO3xHc+1QduJA9/+tTAWYXpFN6wWHhY5sws72kfwQW7PEA8Oc1JWhVj9+Qy1Y6u8r1F0UTla0i4TiU0= github</code></pre><h2 id="1b40c245-273b-80a4-841f-ed34d15c3540" class="">Add Public Key to Github</h2><p id="1b40c245-273b-8077-af04-eb387e7035dc" class="">Now, the public and private key pair has been generated. We add public key to git hub</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1b40c245-273b-80f8-8e40-e36536a04dfd" class="code"><code class="language-Python">cat ~/.ssh/id_rsa_github.pub</code></pre><p id="1b40c245-273b-808b-b1f9-f4051751ef1b" class="">Copy the entire output and paste it below and add. Choose “Authentication Key”</p><figure id="1b40c245-273b-807e-91a9-c32392cf6ab2" class="image"><a href="Git%20b8b8b3750b42432dbda974472722a56a/image%201.png"><img style="width:710px" src="Git%20b8b8b3750b42432dbda974472722a56a/image%201.png"/></a></figure><p id="03a3f445-a81f-4a42-878d-d789523f8784" class="">Must change config file</p><p id="060b6c76-802c-4f60-ad31-87eaa97703bf" class=""><a href="https://stackoverflow.com/questions/41412964/using-a-non-default-key-name-other-than-id-rsa">https://stackoverflow.com/questions/41412964/using-a-non-default-key-name-other-than-id-rsa</a></p><p id="0dc8eab4-ef04-458b-ba76-3a5f6ce7dbc8" class=""><a href="https://superuser.com/questions/232373/how-to-tell-git-which-private-key-to-use">https://superuser.com/questions/232373/how-to-tell-git-which-private-key-to-use</a></p><h1 id="07faa32a-e535-45aa-b811-9ebef3e9a72e" class="">Cloning Repository with SSH</h1><p id="414d2370-19df-4825-9959-85bfae9ae056" class=""><a href="https://phoenixnap.com/kb/git-clone-ssh">https://phoenixnap.com/kb/git-clone-ssh</a></p><h1 id="11a0c245-273b-807b-bde6-f8f586bbc4c5" class="">Test if ssh is setup for Github correctly</h1><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="11a0c245-273b-80a3-846c-c4cd3ca07663" class="code"><code class="language-JavaScript">ssh -T git@github.com</code></pre><figure id="11a0c245-273b-801b-bc9c-d8e89bd47a41" class="image"><a href="Git%20b8b8b3750b42432dbda974472722a56a/image%202.png"><img style="width:708px" src="Git%20b8b8b3750b42432dbda974472722a56a/image%202.png"/></a></figure><h1 id="ad0c6a98-45f2-4cc2-bbbe-8a6fb6358537" class="">Local Repo is up to date with Git repo or not</h1><h2 id="245a2b0d-2d96-4525-af6e-adad3e3e506e" class="">Check if local is up to date with Git repo or not</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="385ccdb9-730c-4ba5-ac36-cab1ed2ca601" class="code"><code class="language-Python">git remote update
+git status</code></pre><h2 id="0812c132-ab91-4bbe-b73b-4844ef348d7a" class="">It is behind Git repo and you’d like to bring local repo up to date with Git repo</h2><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0f553387-ad22-47e0-97be-ab08e87e7162" class="code"><code class="language-Python">git pull</code></pre><h1 id="a07a61c1-c6e4-44b0-94d4-069aa02028c4" class="">Git commits history</h1><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f8fab52b-cf36-4704-9c80-2e04147b87f4" class="code"><code class="language-Java">git log</code></pre><h1 id="bf6a3acd-c8d2-419b-90cf-670cc5e9f27c" class="">Squash</h1><p id="20a7e59d-ff99-4932-9e5a-98d4f48dfd9f" class="">To squash the last 3 commits and then edit the commit message use this following command.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="80f3f7a1-8ee6-4d90-9c0b-4174139076c2" class="code"><code class="language-Java">git reset --soft HEAD~3 &amp;&amp; 
+git commit --edit -m&quot;$(git log --format=%B --reverse HEAD..HEAD@{1})&quot;</code></pre><h3 id="00748fca-5941-40d1-8dfa-3a964d000601" class="">To not include certain files in git commit</h3><p id="9285e7ad-881e-4475-aef1-cedc471b4d58" class="">specify the files that you don’t want to include in .gitignore file</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="8e3cafef-d5aa-4b0e-80af-0abd819723b8" class="code"><code class="language-Java">touch .gitignore //create .gitignore file first
+vim .gitignore //edit this text file and specify files you don&#x27;t want</code></pre><p id="ab85bc18-c9c4-42fc-96a5-3aa517398965" class="">This is the .gitignore file and this file shows to not include all .log and .json files</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9d5ad8ea-43b2-43ce-a749-450624d85155" class="code"><code class="language-Java">*.log
+*.json</code></pre><p id="2503d5bc-c75a-4af4-99f2-ce3e8ae6a182" class="">Now we want to clear all cache before committing because if you don’t clear cache, git might still be tracking the files that you just specified to ignore in .gitignore and these files will also get included in new commits. We want to clear the cache so that git is not tracking these files(in our case, .log and .json) anymore.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f3102e36-70b8-4eac-af48-7ad3e7a3c87a" class="code"><code class="language-Java">git rm -r --cached .</code></pre><p id="d18ebd57-8821-468d-9b87-261595fc39cf" class="">To check files included in a particular file</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="bfe0a290-afc4-4224-ba6a-c7421bb67c60" class="code"><code class="language-Java">git ls-tree --name-only -r &lt;commit-ish&gt;
+## Ex: git ls-tree --name-only -r main
+## Ex: git ls-tree --name-only -r abc1234
+## abc1234 is a commit</code></pre><h1 id="11a0c245-273b-803c-bfa3-f3fbef53a310" class="">How to push non-git directory to github</h1><p id="11a0c245-273b-80a4-99c6-c5b61332044b" class=""><em>Source: </em><em><a href="https://stackoverflow.com/questions/3311774/how-to-convert-existing-non-empty-directory-into-a-git-working-directory-and-pus">https://stackoverflow.com/questions/3311774/how-to-convert-existing-non-empty-directory-into-a-git-working-directory-and-pus</a></em></p><p id="11a0c245-273b-806a-9446-dd23379ce181" class="">This is how I do. I have added an explanation to understand what the heck is going on.</p><p id="11a0c245-273b-80bf-909e-f8a42446805d" class=""><strong>Initialize Local Repository</strong></p><ul id="11a0c245-273b-8051-bb1b-d21bbaa1bad5" class="bulleted-list"><li style="list-style-type:disc">first, initialize Git with<blockquote id="11a0c245-273b-800f-b20e-fcf5c0b305ed" class="">git init</blockquote></li></ul><ul id="11a0c245-273b-8067-ab0c-f08bddb2cafe" class="bulleted-list"><li style="list-style-type:disc">Add all Files for version control with<blockquote id="11a0c245-273b-809b-9c99-da19f924e61c" class="">git add .</blockquote></li></ul><ul id="11a0c245-273b-8067-ab57-c0a1bd25a5f0" class="bulleted-list"><li style="list-style-type:disc">Create a commit with a message of your choice</li></ul><blockquote id="11a0c245-273b-80ae-8112-c783925f1422" class="">git commit -m &#x27;AddingBaseCode&#x27;</blockquote><p id="11a0c245-273b-80c6-b165-e056b11ba064" class=""><strong>Initialize Remote Repository</strong></p><ul id="11a0c245-273b-80ba-803f-d6d56cbd0559" class="bulleted-list"><li style="list-style-type:disc">Create a project on GitHub and copy the SSH URL of your project. as shown below:</li></ul><figure id="11a0c245-273b-80a5-bb88-ece590a46fb9" class="image"><a href="Git%20b8b8b3750b42432dbda974472722a56a/image%203.png"><img style="width:2448px" src="Git%20b8b8b3750b42432dbda974472722a56a/image%203.png"/></a></figure><p id="11a0c245-273b-8017-83aa-da80f61a0c68" class=""><strong>Link Remote repo with Local repo</strong></p><p id="11a0c245-273b-8083-88d5-c94eeea016ee" class=""><strong>Use SSH url so that the ssh key you setup can be used to authenticate. Otherwise, it might prompt you to enter github username, password and it’s really clumsy and possibly not work</strong></p><ul id="11a0c245-273b-80da-9f38-ede4d316fdf1" class="bulleted-list"><li style="list-style-type:disc">Now use copied URL to link your local repo with the remote GitHub repo. When you clone a repository with git clone, it automatically creates a remote connection called <strong>origin</strong>pointing back to the cloned repository. The command remote is used to manage a set of tracked repositories.<blockquote id="11a0c245-273b-80ee-a57b-e118b2d904aa" class="">git remote add origin <a href="mailto:git@github.com">git@github.com</a>:pristinawang/temp-test.git</blockquote></li></ul><p id="11a0c245-273b-80ea-bfa5-eea6a8463ea6" class="">If you added the wrong url at first, use this to update to the right url</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="11a0c245-273b-8028-813e-dd1df75cfd02" class="code"><code class="language-JavaScript">git remote set-url origin git@github.com:ppreyer/first_app.git</code></pre><p id="11a0c245-273b-80bf-9af6-cf79ed54ba24" class="">Add branch</p><ul id="11a0c245-273b-80e8-bdd4-d95a01fa7bed" class="bulleted-list"><li style="list-style-type:disc">No branch, must add main branch<blockquote id="11a0c245-273b-8087-bb98-ef51dd26bfb9" class="">git branch -M main</blockquote></li></ul><p id="11a0c245-273b-8014-abfb-e7c41c003404" class=""><strong>Commit your code</strong></p><ul id="11a0c245-273b-80ca-8eef-e9ac41fefc11" class="bulleted-list"><li style="list-style-type:disc">Finally, push all changes on GitHub<blockquote id="11a0c245-273b-80d4-88fd-c5d895a2aeba" class="">git push -u origin main</blockquote></li></ul><p id="11a0c245-273b-8086-88af-d608b3b0cc74" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
